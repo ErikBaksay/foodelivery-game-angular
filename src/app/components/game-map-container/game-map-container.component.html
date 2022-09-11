@@ -1,5 +1,16 @@
+<div id="control-panel">
+    <div id="money">
+        <h2>${{money}}</h2>
+    </div>
+    <div id="purchase-panel">
+        <div class="vehicle-to-purchase">
+            <p>Price: ${{prices[0]}}</p>
+            <button (click)="buy('car1')">Buy</button>
+        </div>
+    </div>
+    
+</div>
 <div id="game-container">
-    <!--<img src="./../../../assets/Car1.svg" class="car path1" id="car1">-->
     <div id="town-container">
         <img src="./../../../assets/Town.svg" id="town">
     </div>

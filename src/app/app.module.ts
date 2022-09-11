@@ -11,7 +11,7 @@ import { GameMapContainerComponent } from './components/game-map-container/game-
   declarations: [
     AppComponent,
     MainPageComponent,
-    GameMapContainerComponent
+    GameMapContainerComponent,
   ],
   imports: [
     BrowserModule,
