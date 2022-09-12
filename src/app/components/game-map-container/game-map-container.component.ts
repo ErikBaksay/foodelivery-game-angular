@@ -81,7 +81,7 @@ export class GameMapContainerComponent implements OnInit {
     vehicle.classList.add('path1')
     vehicle.style.position = 'absolute'
     vehicle.style.height = 30*this.scale+'px'
-    vehicle.setAttribute('src',"./../../../assets/Car1.svg")
+    vehicle.setAttribute('src',"assets/Car1.svg")
     vehicle.style.transform = 'rotate(90deg)'
     gameContainer!.append(vehicle)
     let pathRect = town!.getBoundingClientRect();
