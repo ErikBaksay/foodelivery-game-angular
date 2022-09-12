@@ -1,3 +1,7 @@
+#reset
+    position: absolute
+    top: 10px
+    left: 10px
 #control-panel
     display: flex
     flex-direction: row
@@ -45,4 +49,19 @@
     #game-container
         height: 450px
         width: 450px
+        position: relative
+@media all and (max-width: 480px)
+    #control-panel
+        width: 280px
+    #game-container
+        height: 300px
+        width: 300px
+        position: relative
+
+@media all and (max-height: 480px)
+    #control-panel
+        width: 280px
+    #game-container
+        height: 300px
+        width: 300px
         position: relative

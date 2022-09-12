@@ -6,15 +6,12 @@ import { Injectable, EventEmitter } from '@angular/core';
 })
 export class GameDataService {
 
-  activeVehicles : string[] = ['car1','car1']
   numberOfType : {'car1':number} = {'car1':-1}
-  money : number = 100
   moneyChanged = new EventEmitter()
   pricesChanged = new EventEmitter()
-  prices : number[] = [100] 
   save : Save = {
     money: 100,
-    vehicles: [],
+    vehicles: ['car1'],
     prices: [100]
   }
 
@@ -22,12 +19,29 @@ export class GameDataService {
 
   loadSavedGame():Save{
     let saveTemp = localStorage.getItem('savedGame')
+    console.log(saveTemp);
     if (saveTemp == null){
       return this.save
     }else{
       this.save = JSON.parse(saveTemp)
+      this.save.prices = this.save.prices
       return this.save
     }
+  }
+
+  resetSave(){
+    this.save = {
+      money: 100,
+      vehicles: ['car1'],
+      prices: [100]
+    }
+    console.log('reset');
+    localStorage.setItem('savedGame',JSON.stringify(this.save))
+    console.log(this.save);
+    let saveTemp = localStorage.getItem('savedGame')
+    console.log(saveTemp);
+    
+    this.loadSavedGame()
   }
 
   saveGame(){
@@ -35,34 +49,31 @@ export class GameDataService {
   }
 
   addVehicle(type:string){
-    console.log(this.numberOfType);
-    this.activeVehicles.push(type)
     this.numberOfType.car1 += 1
-    console.log(this.numberOfType);
-    
-  }
-  getActiveVehicles(){
-    return this.activeVehicles
+    this.saveGame()
   }
   getNumberOfType(){
     return this.numberOfType
   }
   earn(amount:number){
-    this.money += amount
-    console.log('earned '+amount+', money:',this.money); 
+    this.save.money += amount
     this.moneyChanged.emit()
+    this.saveGame()
   }
   spend(amount:number){
-    this.money -= amount
-    console.log('spent '+amount+', money:',this.money); 
-    this.prices[0] = Math.trunc(this.prices[0]*1.5)
+    this.save.money -= amount
+    this.save.prices[0] = Math.trunc(this.save.prices[0]*1.5)
     this.pricesChanged.emit()
     this.moneyChanged.emit()
   }
+  buy(amount:number,type:string){
+    this.save.vehicles.push(type)
+    this.spend(amount)
+  }
   getMoneyAmount(){
-    return this.money
+    return this.save.money
   }
   getPrices(){
-    return this.prices
+    return this.save.prices
   }
 }
